@@ -1,8 +1,9 @@
 # 로또 프로그램
 
 * chromedriver.exe 설치 확인 후 사용
-* This version of ChromeDriver only supports Chrome version 93
+* This version of ChromeDriver only supports Chrome version 95
   * 이런 오류가 나면 최신버전으로 업그레이드 하면 됨
+  * https://chromedriver.chromium.org/downloads
 
 ### lotto_1
 
@@ -33,7 +34,7 @@
       	* 총합(result) : 모든 숫자의 합이 80 초과 230 미만인 조합 찾음
       	* 소수갯수(result) : 소수의 갯수가 1 ~ 3 개인 조합 찾음
       	* 이월수(result,최근숫자) : 지난 회차와 이번 회차의 중복된 숫자가 0~2개인 조합 찾음
-   	* 연속수(result) : 첫번째 자리부터 다음 자리의 숫자와 1차이가 나는 갯수가 2개 보다 적은 조합 찾음
+      	* 연속수(result) : 첫번째 자리부터 다음 자리의 숫자와 1차이가 나는 갯수가 2개 보다 적은 조합 찾음
    	* 동끝수(result) : 1의 자리가 같은 숫자들이 2개 이하인 조합 찾은
    	* 홀짝(result) : 모든 숫자가 홀이거나, 모든 숫자가 짝이면 안됨
    	* 배수변형(bae, result) : 배수만들기의 결과를 이용하여 결과값 변형

@@ -35,23 +35,23 @@ def 엑셀다운():
   time.sleep(2)
 
   # 편집허용 버튼 클릭(엑셀이 같은 모니터에 나오게 한 상태로 진행)
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\pyunzip.png"))
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\pyunzip.png"))
   time.sleep(1)
   # # 다른 이름으로 저장 클릭
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\file.png"))
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\file.png"))
   time.sleep(1)
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\dsave.png"))
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\dsave.png"))
   time.sleep(1)
   # 폴더 선택
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\looking.png"))
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\looking.png"))
   time.sleep(1)
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\search.png"))
-  pyautogui.write("C:\Hyun_Folder\ETC\lotto")
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\search.png"))
+  pyautogui.write("C:\\Users\\User\\Desktop\\lotto")
   pyautogui.press("Enter")
   time.sleep(1)
 
   # 확장자 변경 및 저장
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\hoak.png"))
+  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\hoak.png"))
   time.sleep(1)
   pyautogui.press("Home")
   time.sleep(1)

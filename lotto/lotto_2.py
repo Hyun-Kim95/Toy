@@ -1,7 +1,7 @@
 # 엑셀에서 최근 숫자와 다음에 올 숫자 등 분석
 from openpyxl import load_workbook
 
-wb = load_workbook("C:\\Hyun_Folder\\ETC\\lotto\\excel.xlsx")
+wb = load_workbook("C:\\Users\\User\\Desktop\\lotto\\excel.xlsx")
 ws = wb.active
 
 # 1회차 줄 확인을 위한 현재 회차 구함

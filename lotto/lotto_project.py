@@ -29,7 +29,7 @@ for num in ln.조합(cnt):
   내용 += str(num)
   내용 += "\n"
 
-wb.save("C:\\Hyun_Folder\\ETC\\lotto\\lotto_result.xlsx")
+wb.save("C:\\Users\\User\\Desktop\\lotto\\lotto_result.xlsx")
 print("엑셀에 저장 완료")
 wb.close()
 
