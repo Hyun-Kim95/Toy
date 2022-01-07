@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.toy.kh.diary.dao.GenFileDao">
+
+	<update id="changeRelId">
+		UPDATE genFile
+		<set>
+			updateDate = NOW(),
+			relId = #{relId}
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<select id="getGenFiles" resultType="GenFile">
+		SELECT *
+		FROM genFile
+		WHERE 1
+		AND relId = #{relId}
+		ORDER BY fileNo
+	</select>
+	
+	<select id="getGenFile" resultType="GenFile">
+		SELECT *
+		FROM genFile
+		WHERE 1
+		<if test="relId != null">
+			AND relId = #{relId}
+		</if>
+		<if test="fileNo != null">
+			AND fileNo = #{fileNo}
+		</if>
+	</select>
+	
+	<insert id="saveMeta" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO genFile
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		relId = #{relId},
+		fileNo = #{fileNo},
+		originFileName = #{originFileName},
+		fileExtTypeCode = #{fileExtTypeCode},
+		fileExtType2Code = #{fileExtType2Code},
+		fileSize = #{fileSize},
+		fileDir = #{fileDir},
+		fileExt = #{fileExt}
+	</insert>
+	
+	<select id="getGenFileById" resultType="GenFile">
+		SELECT *
+		FROM genFile
+		WHERE 1
+		AND id = #{id}
+	</select>
+	
+	<select
+		id="getGenFilesRelIds"
+		resultType="GenFile">
+		SELECT *
+		FROM genFile
+		WHERE 1
+		<if test="relIds != null and relIds.size > 0">
+			AND relId IN
+			<foreach item="relId" index="index" collection="relIds"
+				open="(" separator="," close=")">
+				#{relId}
+			</foreach>
+		</if>
+		ORDER BY relId, fileNo
+	</select>
+	
+	<delete id="deleteFile">
+		DELETE FROM genFile
+		WHERE id = #{id}
+	</delete>
+</mapper>

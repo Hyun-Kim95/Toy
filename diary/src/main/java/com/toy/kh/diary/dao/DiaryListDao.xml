@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.toy.kh.diary.dao.DiaryListDao">
+
+	<select id="getDiariesTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM diaryList AS D
+		WHERE 1
+		<if test="searchKeywordType == 'title'">
+			AND D.title LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		<if test="searchKeywordType == 'body'">
+			AND D.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		<if test="searchKeywordType == 'titleAndBody'">
+			AND (D.title LIKE CONCAT('%', #{searchKeyword}, '%') OR
+			D.`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if>
+	</select>
+	
+	<select id="getForPrintDiaries" resultType="DiaryList">
+		SELECT D.*,
+		IFNULL(U.nickname, "탈퇴회원") AS extra__writer
+		FROM diaryList AS D
+		LEFT JOIN diaryUser AS U
+		ON D.userId = U.id
+		WHERE 1
+		<if test="searchKeywordType == 'title'">
+			AND D.title LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		<if test="searchKeywordType == 'body'">
+			AND D.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		<if test="searchKeywordType == 'titleAndBody'">
+			AND (D.title LIKE CONCAT('%', #{searchKeyword}, '%') OR
+			D.`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if>
+		ORDER BY D.regDate DESC
+		<if test="limitStart != null and limitTake != null">
+			LIMIT #{limitStart}, #{limitTake}
+		</if>
+	</select>
+	
+	<select id="getForPrintDiaryList" resultType="DiaryList">
+		SELECT D.*,
+		IFNULL(U.nickname, "탈퇴회원") AS extra__writer
+		FROM diaryList AS D
+		LEFT JOIN
+		diaryUser AS U
+		ON D.userId = U.id
+		WHERE D.id = #{id}
+	</select>
+	
+	<insert id="addDiary" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO diaryList
+		SET regDate = #{selectedDate},
+		updateDate = NOW(),
+		userId = #{userId},
+		title = #{title},
+		`body` = #{body}
+	</insert>
+	
+	<update id="modifyDiaryList">
+		UPDATE diaryList
+		<set>
+			<if test="title != null or body != null">
+				updateDate = NOW(),
+			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="body != null">
+				`body` = #{body},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteDiaryList">
+		DELETE FROM diaryList
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getDiariesByRegDate" resultType="DiaryList">
+		SELECT *
+		FROM diaryList
+		WHERE regDate = #{regDate}
+	</select>
+</mapper>

@@ -1,0 +1,24 @@
+server:
+  port: 8053
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:log4jdbc:mysql://127.0.0.1:8086/diary?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: toyuser
+    password: 1234
+mybatis:
+  type-aliases-package: com.toy.kh.diary.dto
+custom:
+  genFileDirPath: C:/work/diary-file
+  logging:
+    dir: log
+    level: debug
