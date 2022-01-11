@@ -36,6 +36,10 @@ def 조합(cnt):
                   if(result[0]==0):
                     continue
                   if((result[0]) != 0):
+                    if(result[0] != 1):
+                      result[0] -= 1
+                    if(result[5] <= 43):
+                      result[5] += 2
                     if(result not in 조합):
                       # 다양성을 위해 추가(이번에 구한 조합의 첫 숫자가 이전 조합에 포함 안되있어야 함)
                       if (len(조합) > 0 and result[0] not in 조합[-1] and result[-1] not in 조합[-1]):

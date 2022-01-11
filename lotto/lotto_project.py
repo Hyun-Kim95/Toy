@@ -24,17 +24,25 @@ wb = Workbook()
 ws = wb.active
 cnt = int(input("구하고자 하는 추천번호의 갯수를 입력하세요 >> "))
 내용 = ""
+
+print("로또 예상 번호 : ")
 for num in ln.조합(cnt):
   ws.append(num)
   내용 += str(num)
   내용 += "\n"
-
-wb.save("C:\\Users\\User\\Desktop\\lotto\\lotto_result.xlsx")
-print("엑셀에 저장 완료")
+  print(num)
+try:
+  wb.save("C:\\Users\\User\\Desktop\\lotto\\lotto_result.xlsx")
+  print("엑셀에 저장 완료")
+except:
+  print("엑셀에 저장 실패")
 wb.close()
 
 # 메일로 전송
-b.실행(내용)
+try:
+  b.실행(내용)
+except:
+  print("메일로 전송 실패")
 
 print("실행완료")
 input("종료하시려면 아무키나 입력하세요...")
