@@ -28,6 +28,9 @@
 		LEFT JOIN diaryUser AS U
 		ON D.userId = U.id
 		WHERE 1
+		<if test="selectedDate != null">
+			AND D.regDate = #{selectedDate}
+		</if>
 		<if test="searchKeywordType == 'title'">
 			AND D.title LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>

@@ -51,7 +51,7 @@ public class DiaryListController {
 	}
 	
 	@RequestMapping("/diaryList/list")
-	public String showList(HttpServletRequest req, String searchKeywordType, String searchKeyword, @RequestParam(defaultValue = "1") int page) {
+	public String showList(HttpServletRequest req, String selectedDate, String searchKeywordType, String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		// 검색할 타입(title or body)
 		if (searchKeywordType != null) {
 			searchKeywordType = searchKeywordType.trim();
@@ -73,10 +73,14 @@ public class DiaryListController {
 			searchKeywordType = null;
 		}
 		
+		if (selectedDate == null || selectedDate.length() == 0) {
+			selectedDate = null;
+		}
+		
 		// 페이징을 위해 게시물 수 확인
 		int totalItemsCount = diaryListService.getDiariesTotalCount(searchKeywordType, searchKeyword);
 		// 한 페이지에 보여줄 게시물 수
-		int itemsInAPage = 20;
+		int itemsInAPage = 10;
 		// 전체 페이지 수
 		int totalPage = (int) Math.ceil(totalItemsCount / (double) itemsInAPage);
 		// (선택된 화면 외에 보여질)페이지 버튼 수
@@ -93,7 +97,7 @@ public class DiaryListController {
 			pageMenuEnd = totalPage;
 		}
 		// 해당 페이지에 있는 게시물들
-		List<DiaryList> diaries = diaryListService.getForPrintDiaries(searchKeywordType, searchKeyword, page, itemsInAPage);
+		List<DiaryList> diaries = diaryListService.getForPrintDiaries(selectedDate ,searchKeywordType, searchKeyword, page, itemsInAPage);
 		// 뷰에서 사용함
 		req.setAttribute("totalItemsCount", totalItemsCount);
 		req.setAttribute("diaries", diaries);
@@ -102,6 +106,7 @@ public class DiaryListController {
 		req.setAttribute("pageMenuArmSize", pageMenuArmSize);
 		req.setAttribute("pageMenuStart", pageMenuStart);
 		req.setAttribute("pageMenuEnd", pageMenuEnd);
+		req.setAttribute("selectedDate", selectedDate);
 
 		return "diaryList/list";
 	}

@@ -14,7 +14,7 @@ public interface DiaryListDao {
 	int getDiariesTotalCount(@Param("searchKeywordType") String searchKeywordType,
 			@Param("searchKeyword") String searchKeyword);
 
-	List<DiaryList> getForPrintDiaries(@Param("searchKeywordType") String searchKeywordType,
+	List<DiaryList> getForPrintDiaries(@Param("selectedDate")String selectedDate, @Param("searchKeywordType") String searchKeywordType,
 			@Param("searchKeyword") String searchKeyword, @Param("limitStart") int limitStart,
 			@Param("limitTake") int limitTake);
 

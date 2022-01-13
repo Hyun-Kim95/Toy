@@ -24,13 +24,13 @@ public class DiaryListService {
 		return diaryListDao.getDiariesTotalCount(searchKeywordType, searchKeyword);
 	}
 
-	public List<DiaryList> getForPrintDiaries(String searchKeywordType, String searchKeyword, int page,
-			int itemsInAPage) {
+	public List<DiaryList> getForPrintDiaries(String selectedDate, String searchKeywordType, String searchKeyword,
+			int page, int itemsInAPage) {
 		int limitStart = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
 
-		List<DiaryList> diaries = diaryListDao.getForPrintDiaries(searchKeywordType, searchKeyword, limitStart,
-				limitTake);
+		List<DiaryList> diaries = diaryListDao.getForPrintDiaries(selectedDate, searchKeywordType, searchKeyword,
+				limitStart, limitTake);
 		List<Integer> diaryIds = diaries.stream().map(diaryList -> diaryList.getId()).collect(Collectors.toList());
 		Map<Integer, Map<String, GenFile>> filesMap = genFileService.getFilesMapKeyRelIdAndFileNo(diaryIds);
 
@@ -59,7 +59,7 @@ public class DiaryListService {
 		return diaryListDao.getForPrintDiaryList(id);
 	}
 
-	public void deleteDiaryList(int id) {		
+	public void deleteDiaryList(int id) {
 		diaryListDao.deleteDiaryList(id);
 
 		genFileService.deleteGenFiles(id);
@@ -67,14 +67,14 @@ public class DiaryListService {
 
 	public int modifyDiaryList(Map<String, Object> param) {
 		diaryListDao.modifyDiaryList(param);
-		
+
 		int id = Util.getAsInt(param.get("id"), 0);
-		
+
 		return id;
 	}
 
 	public DiaryList getDiariesByRegDate(String regDate) {
 		return diaryListDao.getDiariesByRegDate(regDate);
-		
+
 	}
 }
