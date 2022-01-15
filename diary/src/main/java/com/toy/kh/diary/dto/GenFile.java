@@ -47,6 +47,6 @@ public class GenFile{
 	}
 	
 	public String getMediaHtml() {
-		return "<img src=\"" + getForPrintUrl() + "\">";
+		return "<img src=\"" + getForPrintUrl() + " style=\"width=400px\">";
 	}
 }

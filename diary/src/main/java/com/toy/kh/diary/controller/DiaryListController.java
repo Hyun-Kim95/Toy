@@ -137,7 +137,7 @@ public class DiaryListController {
 		DiaryList diary = diaryListService.getDiariesByRegDate(param.get("selectedDate").toString());
 		
 		if (diary != null) {
-			return Util.msgAndReplace("해당 날짜의 일기가 이미 존재합니다.", "../diaryList/detail?id="+diary.getId());
+			return Util.msgAndBack("해당 날짜의 일기가 이미 존재합니다.");
 		}
 
 		param.put("userId", loginedUserId);
