@@ -13,7 +13,8 @@ bae = [lo.삼의배수(cha),lo.사의배수(cha)]
 def 조합(cnt):
   # 추천조합 cnt개 구함
   조합 = []
-  while (len(조합) < cnt - 1):
+  # 한개의 조합만 구하려면 마지막 숫자를 따로 구하는 로직을 실행할 수 없어서 여기 들어가야 함
+  while (len(조합) < cnt - 1 or (cnt == 1 and len(조합) == 0)):
     result = []
     # 가능한 숫자에서 랜덤 조합과 중복 제거
     for i in range(6):
@@ -47,32 +48,34 @@ def 조합(cnt):
                       elif (len(조합) == 0):
                         조합.append(result)
   # 마지막 조합은 앞의 숫자들의 평균으로 구함
-  last_list = []
-  j = 0
-  while (j < 6):
-    chk = 0
-    for i in range(cnt-1):
-      chk += 조합[i][j]
-    num = int(chk / (cnt-1))
+  # 만약 구하는 숫자가 1개면 실행 안함
+  if(cnt != 1):
+    last_list = []
+    j = 0
+    while (j < 6):
+      chk = 0
+      for i in range(cnt-1):
+        chk += 조합[i][j]
+      num = int(chk / (cnt-1))
 
-    success = 0
-    while (num < 45 and num > 1 and success == 0):
-      for k in 조합:
-        if(num in k):
-          if (j >= 3):
-            num += 1
+      success = 0
+      while (num < 45 and num > 1 and success == 0):
+        for k in 조합:
+          if(num in k):
+            if (j >= 3):
+              num += 1
+            else:
+              num -= 1
+            break
           else:
-            num -= 1
-          break
+            success = 1
+      if (num in last_list):
+        if(num == 45):
+          num -= 1
         else:
-          success = 1
-    if (num in last_list):
-      if(num == 45):
-        num -= 1
-      else:
-        num += 1
-    last_list.append(num)
-    j += 1
+          num += 1
+      last_list.append(num)
+      j += 1
+    조합.append(last_list)
 
-  조합.append(last_list)
   return 조합

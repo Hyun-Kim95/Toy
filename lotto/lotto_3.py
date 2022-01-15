@@ -102,7 +102,7 @@ def 연속수(result):
   for i in range(1,len(result)):
     if result[i] - result[i-1] == 1:
       cnt += 1
-  if cnt <= 2:
+  if cnt <= 1:
     return True
   return False
 
