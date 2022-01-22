@@ -8,11 +8,18 @@ ws = wb.active
 a = ws.cell(row=4,column=2).value + 4
 최근숫자 = []
 다음숫자 = []
-
+전체숫자 = []
 # 라인 별 최근 수 구함
 for num in range(6):
   최근숫자.append(ws.cell(row=4,column=14+num).value)
 # 라인 별 다음 수 구함
+
+for p in range(5,a):
+  라인 = []
+  for k in range(7):
+    라인.append(ws.cell(row=p, column=14+k).value)
+  전체숫자.append(라인)
+
 i = 0
 while(i < 6):
   라인 = []

@@ -7,6 +7,7 @@ import lotto_3 as lo
 cha = ex.cha
 다음숫자 = ex.다음숫자
 최근숫자 = ex.최근숫자
+전체숫자 = ex.전체숫자
 # 오차 비교용(번걸아가면 숫자에 적용)
 bae = [lo.삼의배수(cha),lo.사의배수(cha)]
 
@@ -44,8 +45,10 @@ def 조합(cnt):
                     if(result not in 조합):
                       # 다양성을 위해 추가(이번에 구한 조합의 첫 숫자가 이전 조합에 포함 안되있어야 함)
                       if (len(조합) > 0 and result[0] not in 조합[-1] and result[-1] not in 조합[-1]):
+                        result.append(lo.과거등수(result, 전체숫자))
                         조합.append(result)
                       elif (len(조합) == 0):
+                        result.append(lo.과거등수(result, 전체숫자))
                         조합.append(result)
   # 마지막 조합은 앞의 숫자들의 평균으로 구함
   # 만약 구하는 숫자가 1개면 실행 안함
@@ -76,6 +79,7 @@ def 조합(cnt):
           num += 1
       last_list.append(num)
       j += 1
+    last_list.append(lo.과거등수(last_list, 전체숫자))
     조합.append(last_list)
 
   return 조합
