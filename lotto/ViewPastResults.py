@@ -51,7 +51,7 @@ wb.close()
 
 while True:
   print("\n종료를 원하실 때는 'y'를 입력해주세요.")
-  chk = input("\n조회하실 번호 6개를 띄어쓰기 기준으로 입력해주세요 >> ")
+  chk = input("\n조회하실 번호 6개를 띄어쓰기 한칸을 기준으로 입력해주세요 >> ").strip()
   
   if chk.strip() == 'y':
     print("5초 후에 종료합니다.")
