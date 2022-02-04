@@ -1,5 +1,7 @@
 package com.toy.kh.diary.service;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -76,5 +78,21 @@ public class DiaryListService {
 	public DiaryList getDiariesByRegDate(String regDate) {
 		return diaryListDao.getDiariesByRegDate(regDate);
 
+	}
+
+	public String[] getDiariesMissing() throws ParseException {
+		String past = Util.getPastMonthStr();
+		String[] ans = new String[31];
+
+		int i = 0;
+		String day = "";
+		while(day.equals(past)) {
+			if(diaryListDao.getDiariesByRegDate(day) == null) {
+				ans[i] = day;
+			}
+			i++;
+			day = Util.getPastDateStr(i);
+		}
+		return ans;
 	}
 }

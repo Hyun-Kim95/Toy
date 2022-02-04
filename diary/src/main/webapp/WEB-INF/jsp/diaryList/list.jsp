@@ -66,8 +66,11 @@
 						<div class="flex items-center mt-10">
 							<fmt:parseDate var="parseDate" value="${diary.regDate}" pattern="yyyy-MM-dd"/>
 							<fmt:formatDate var="resultDt" value="${parseDate}" pattern="yyyy-MM-dd"/>
-							<a href="${detailUrl}" class="ml-2 font-bold text-xl">${resultDt}</a>
+							<a href="${detailUrl}" class="ml-2 font-bold text-xl">${resultDt}(${Util.getDateDay(resultDt)})</a>
+							<fmt:parseDate var="parseDate" value="${diary.updateDate}" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate var="resultDt2" value="${parseDate}" pattern="yyyy-MM-dd"/>
 							<div class="flex-grow"></div>
+							<div class="text-gray-300">update : ${resultDt2}</div>
 						</div>
 						<div class="mt-2">
 							<a href="${detailUrl}"

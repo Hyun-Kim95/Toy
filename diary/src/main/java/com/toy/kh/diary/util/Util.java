@@ -1,6 +1,7 @@
 package com.toy.kh.diary.util;
 
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -26,6 +27,60 @@ public class Util {
         cal.add(Calendar.DATE, 1);
         return dtf.format(cal.getTime());
     }
+	
+	// 한달 전 날짜
+	public static String getPastMonthStr() {
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar mon = Calendar.getInstance();
+		mon.add(Calendar.MONTH, -1);
+		return format2.format(mon.getTime());
+	}
+	
+	// 과거 날짜
+	public static String getPastDateStr(int day) {
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, day*(-1));
+		return format2.format(cal.getTime());
+	}
+	
+	public static String getDateDay(String date) throws Exception {
+		 
+	    String day = "" ;
+	     
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
+	    Date nDate = dateFormat.parse(date) ;
+	     
+	    Calendar cal = Calendar.getInstance() ;
+	    cal.setTime(nDate);
+	     
+	    int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
+	     
+	    switch(dayNum){
+	        case 1:
+	            day = "일";
+	            break ;
+	        case 2:
+	            day = "월";
+	            break ;
+	        case 3:
+	            day = "화";
+	            break ;
+	        case 4:
+	            day = "수";
+	            break ;
+	        case 5:
+	            day = "목";
+	            break ;
+	        case 6:
+	            day = "금";
+	            break ;
+	        case 7:
+	            day = "토";
+	            break ;        
+	    }
+	    return day ;
+	}
 
 	public static String msgAndBack(String msg) {
 		StringBuilder sb = new StringBuilder();
@@ -154,6 +209,17 @@ public class Util {
 		}
 
 		return map;
+	}
+	
+	// 숫자가 커질 경우에 보기 좋게 하기 위해서
+	public static String numberFormat(int num) {
+		DecimalFormat df = new DecimalFormat("###,###,###");
+		
+		return df.format(num);
+	}
+	
+	public static String numberFormat(String numStr) {
+		return numberFormat(Integer.parseInt(numStr));
 	}
 	
 	// 회원가입시 모든 글자가 숫자로만 되어 있는지 확인

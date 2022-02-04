@@ -1,7 +1,10 @@
 package com.toy.kh.diary.controller;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.toy.kh.diary.dto.DiaryList;
 import com.toy.kh.diary.dto.DiaryUser;
 import com.toy.kh.diary.dto.ResultData;
+import com.toy.kh.diary.service.DiaryListService;
 import com.toy.kh.diary.service.DiaryUserService;
 import com.toy.kh.diary.util.Util;
 
@@ -20,10 +25,12 @@ import com.toy.kh.diary.util.Util;
 public class UserController {
 	@Autowired
 	private DiaryUserService diaryUserService;
-	
+	@Autowired
+	private DiaryListService diaryListService;
+
 	@GetMapping("/diaryUser/getLoginIdDup")
 	@ResponseBody
-	public ResultData getLoginIdDup(String loginId) {			// 회원가입 시 확인할 것들
+	public ResultData getLoginIdDup(String loginId) { // 회원가입 시 확인할 것들
 		if (loginId == null) {
 			return new ResultData("F-5", "loginId를 입력해주세요.");
 		}
@@ -56,7 +63,7 @@ public class UserController {
 
 		return new ResultData("S-1", String.format("%s(은)는 사용가능한 로그인아이디 입니다.", loginId), "loginId", loginId);
 	}
-	
+
 	@RequestMapping("/diaryUser/login")
 	public String showLogin() {
 		// 관리자든 유저페이지든 유저페이지로그인 화면으로 이동
@@ -92,12 +99,15 @@ public class UserController {
 
 		return Util.msgAndReplace(msg, redirectUrl);
 	}
-	
+
 	@RequestMapping("/home/main")
-	public String showMain() {
+	public String showMain(HttpServletRequest req) throws ParseException {
+		String[] missings = diaryListService.getDiariesMissing();
+		
+		req.setAttribute("missings", missings);
 		return "home/main";
 	}
-	
+
 	@RequestMapping("/diaryUser/join")
 	public String showJoin() {
 		return "diaryUser/join";
@@ -144,7 +154,7 @@ public class UserController {
 
 		return Util.msgAndReplace(msg, redirectUrl);
 	}
-	
+
 	@RequestMapping("/diaryUser/doLogout")
 	@ResponseBody
 	public String doLogout(HttpSession session) {

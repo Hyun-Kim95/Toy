@@ -76,6 +76,21 @@ public class DiaryListController {
 		if (selectedDate == null || selectedDate.length() == 0) {
 			selectedDate = null;
 		}
+
+		// 달력에서 날짜 선택시 포멧을 맞추기 위해서
+		if (selectedDate != null) {
+			String month = selectedDate.split("-")[1];
+			String day = selectedDate.split("-")[2];
+			if (Integer.parseInt(month) < 10) {
+				month = "0" + month;
+			}
+			
+			if (Integer.parseInt(day) < 10) {
+				day = "0" + day;
+			}
+			
+			selectedDate = selectedDate.split("-")[0] + "-" + month + "-" + day;
+		}
 		
 		// 페이징을 위해 게시물 수 확인
 		int totalItemsCount = diaryListService.getDiariesTotalCount(searchKeywordType, searchKeyword);
