@@ -75,23 +75,46 @@ public class DiaryListService {
 		return id;
 	}
 
-	public DiaryList getDiariesByRegDate(String regDate) {
-		return diaryListDao.getDiariesByRegDate(regDate);
+	public List<DiaryList> getDiariesByRegDate(String regDate) {
+		return diaryListDao.getDiariesByRegDate(regDate, regDate);
 
 	}
 
 	public String[] getDiariesMissing() throws ParseException {
 		String past = Util.getPastMonthStr();
 		String[] ans = new String[31];
-
+		String day = Util.getPastDateStr(1);
+		List<DiaryList> chk = diaryListDao.getDiariesByRegDate(day,past);
+		// 사이의 날짜에는 양끝 날짜가 포함이 안돼서 +2를 해줌
 		int i = 0;
-		String day = "";
-		while(day.equals(past)) {
-			if(diaryListDao.getDiariesByRegDate(day) == null) {
-				ans[i] = day;
+		// foreach 문의 마지막 체크용
+		int j = 0;
+		if(chk.size() != Util.getBetween(day, past)+2) {
+			String cmp = null;
+			for (DiaryList diaryList : chk) {
+				j++;
+				if(j == chk.size()) {
+					String[] bf = Util.getBetweenDate(diaryList.getRegDate(), Util.getPastDateStr(1));
+					for (String string : bf) {
+						ans[i] = string;
+						i++;
+					}
+				}
+				
+				if (cmp == null) {
+					cmp = diaryList.getRegDate();
+					continue;
+				}
+				
+				if(Util.getBetween(diaryList.getRegDate(), cmp) != 1) {
+					String[] bf = Util.getBetweenDate(cmp, diaryList.getRegDate());
+					for (String string : bf) {
+						ans[i] = string;
+						i++;
+					}
+				}
+				cmp = diaryList.getRegDate();
 			}
-			i++;
-			day = Util.getPastDateStr(i);
 		}
 		return ans;
 	}

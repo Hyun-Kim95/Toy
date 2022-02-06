@@ -81,14 +81,16 @@
 	        </tbody>
 	    </table>
 	    <div class="bg-white shadow rounded container mx-auto p-8 mt-5">
-	    	<div class="text-xl text-center">한달 이내에 빠진 날짜</div>
-	    	<c:forEach items="${missings}" var="missing">
-	    		<div>
-	    			<c:if test="${missing != null}">
-	    				<button name="selectedDay" value="${missing}">${missing}</button>
-	    			</c:if>
-	    		</div>
-	    	</c:forEach>
+	    	<div class="text-3xl text-center">한달 이내에 빠진 날짜</div>
+	    	<div class="flex">
+		    	<c:forEach items="${missings}" var="missing">
+		    		<div class="flex">
+		    			<c:if test="${missing != null}">
+		    				<button name="selectedDay" class="m-3 btn-primary bg-blue-500 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" value="${missing}">${missing}</button>
+		    			</c:if>
+		    		</div>
+		    	</c:forEach>
+	    	</div>
 	    </div>
 	</form>
 </section>

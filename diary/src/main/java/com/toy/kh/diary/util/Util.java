@@ -1,7 +1,9 @@
 package com.toy.kh.diary.util;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -36,14 +38,64 @@ public class Util {
 		return format2.format(mon.getTime());
 	}
 	
-	// 과거 날짜
+	// 과거 날짜(몇일 전?)
 	public static String getPastDateStr(int day) {
-		SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, day*(-1));
 		return format2.format(cal.getTime());
 	}
 	
+	// 두 날짜 사이의 차이 일수
+	public static int getBetween(String one, String two) throws ParseException {
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(one);
+		Calendar cmpone = Calendar.getInstance();
+		cmpone.setTime(date); //첫번째 일자
+		
+		date = new SimpleDateFormat("yyyy-MM-dd").parse(two);
+		Calendar cmptwo = Calendar.getInstance();
+		cmptwo.setTime(date); //두번째 일자
+		
+		// 초 차이
+		int diffSec = (int) ((cmpone.getTimeInMillis() - cmptwo.getTimeInMillis()) / 1000);
+		// 일 차이
+		int diffDays = diffSec / (24*60*60);
+		return diffDays;
+	}
+	
+	// 두 날짜 사이의 날짜들 구함(빠른 날짜, 나중 날짜)
+	public static String[] getBetweenDate(String start, String end) throws ParseException {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+		//Date타입으로 변경
+
+		Date d1 = df.parse( start );
+		Date d2 = df.parse( end );
+
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+
+		//Calendar 타입으로 변경 add()메소드로 1일씩 추가해 주기위해 변경
+		c1.setTime( d1 );
+		c2.setTime( d2 );
+		
+		String[] ans = new String[31];
+		
+		//시작날짜와 끝 날짜를 비교해, 시작날짜가 작거나 같은 경우 출력
+		int i = 0;
+		while( c1.compareTo( c2 ) !=1 ){
+			// 시작 날짜 제외하기 위해서
+			if(i != 0) {
+				ans[i] = df.format(c1.getTime());
+			}
+			i++;
+			//시작날짜 + 1 일
+			c1.add(Calendar.DATE, 1);
+		}
+		return ans;
+	}
+	
+	// 요일 구함
 	public static String getDateDay(String date) throws Exception {
 		 
 	    String day = "" ;

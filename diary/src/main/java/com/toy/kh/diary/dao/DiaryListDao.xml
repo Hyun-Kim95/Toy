@@ -90,6 +90,10 @@
 	<select id="getDiariesByRegDate" resultType="DiaryList">
 		SELECT *
 		FROM diaryList
-		WHERE regDate = #{regDate}
+		WHERE 1
+		<![CDATA[
+			AND regDate <= #{day} AND regDate >= #{past}
+		]]>
+		ORDER BY regDate ASC
 	</select>
 </mapper>
