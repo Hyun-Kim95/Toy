@@ -149,7 +149,7 @@ public class DiaryListController {
 			return Util.msgAndBack("내용을 입력해주세요.");
 		}
 		
-		DiaryList diary = diaryListService.getDiariesByRegDate(param.get("selectedDate").toString());
+		List<DiaryList> diary = diaryListService.getDiariesByRegDate(param.get("selectedDate").toString());
 		
 		if (diary != null) {
 			return Util.msgAndBack("해당 날짜의 일기가 이미 존재합니다.");
