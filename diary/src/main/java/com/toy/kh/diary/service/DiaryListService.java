@@ -1,7 +1,6 @@
 package com.toy.kh.diary.service;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -117,5 +116,20 @@ public class DiaryListService {
 			}
 		}
 		return ans;
+	}
+
+	public Integer getIdByRegDate(String selectedDate) {
+		if(Integer.parseInt(selectedDate.split("-")[1]) < 10 || Integer.parseInt(selectedDate.split("-")[2]) < 10) {
+			String middle = selectedDate.split("-")[1];
+			String end = selectedDate.split("-")[2];
+			if(Integer.parseInt(selectedDate.split("-")[1]) < 10) {
+				middle = "0" + selectedDate.split("-")[1];
+			}
+			if(Integer.parseInt(selectedDate.split("-")[2]) < 10) {
+				end = "0" + selectedDate.split("-")[2];
+			}
+			selectedDate = selectedDate.split("-")[0] + "-" + middle + "-" + end;
+		}
+		return diaryListDao.getIdByRegDate(selectedDate);
 	}
 }

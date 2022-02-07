@@ -28,7 +28,13 @@ public class DiaryListController {
 	private GenFileService genFileService;
 	
 	@RequestMapping("/diaryList/detail")
-	public String showDetail(HttpServletRequest req, Integer id) {
+	public String showDetail(HttpServletRequest req, Integer id, String selectedDate) {
+		if (selectedDate != null) {
+			id = diaryListService.getIdByRegDate(selectedDate);
+			if(id == null) {
+				return Util.msgAndBack(selectedDate + ", 해당 일자에 일기가 작성되지 않았습니다.");
+			}
+		}
 		if (id == null) {
 			return Util.msgAndBack("id를 입력해주세요.");
 		}
@@ -127,7 +133,10 @@ public class DiaryListController {
 	}
 	
 	@RequestMapping("/diaryList/add")
-	public String showAdd(@RequestParam Map<String, Object> param, HttpServletRequest req) {
+	public String showAdd(@RequestParam Map<String, Object> param, HttpServletRequest req, String selectedDate) {
+		if(selectedDate != null) {
+			req.setAttribute("selectedDate", selectedDate);
+		}
 		return "diaryList/add";
 	}
 
@@ -151,7 +160,7 @@ public class DiaryListController {
 		
 		List<DiaryList> diary = diaryListService.getDiariesByRegDate(param.get("selectedDate").toString());
 		
-		if (diary != null) {
+		if (diary.size() != 0) {
 			return Util.msgAndBack("해당 날짜의 일기가 이미 존재합니다.");
 		}
 

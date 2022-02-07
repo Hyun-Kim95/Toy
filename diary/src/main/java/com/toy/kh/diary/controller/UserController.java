@@ -1,7 +1,6 @@
 package com.toy.kh.diary.controller;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.toy.kh.diary.dto.DiaryList;
 import com.toy.kh.diary.dto.DiaryUser;
 import com.toy.kh.diary.dto.ResultData;
 import com.toy.kh.diary.service.DiaryListService;
@@ -105,6 +103,7 @@ public class UserController {
 		String[] missings = diaryListService.getDiariesMissing();
 		
 		req.setAttribute("missings", missings);
+		
 		return "home/main";
 	}
 

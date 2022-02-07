@@ -57,6 +57,12 @@
 		WHERE D.id = #{id}
 	</select>
 	
+	<select id="getIdByRegDate" resultType="Integer">
+		SELECT id
+		FROM diaryList
+		WHERE regDate = #{selectedDate}
+	</select>
+	
 	<insert id="addDiary" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO diaryList
 		SET regDate = #{selectedDate},

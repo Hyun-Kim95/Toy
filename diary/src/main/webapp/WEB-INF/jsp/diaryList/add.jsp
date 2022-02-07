@@ -29,12 +29,7 @@ DiaryListAdd__fileInputMaxCount = parseInt("${fileInputMaxCount}");
 </script>
 
 <script>
-DiaryListAdd__submited = false;
 function DiaryListAdd__checkAndSubmit(form) {
-	if ( DiaryListAdd__submited ) {
-		alert('처리중입니다.');
-		return;
-	}
 	
 	form.selectedDate.value = form.selectedDate.value.trim();
 	if ( form.selectedDate.value.length == 0 ) {
@@ -108,7 +103,6 @@ function DiaryListAdd__checkAndSubmit(form) {
 			success : onSuccess
 		});
 	}
-	DiaryListAdd__submited = true;
 	
 	startUploadFiles(startSubmitForm);
 }
@@ -123,7 +117,7 @@ function DiaryListAdd__checkAndSubmit(form) {
 					<span>날짜</span>
 				</div>
 				<div class="lg:flex-grow">
-					<input type="text" id="startDate" name="selectedDate" class="form-row-input w-full rounded-sm border-2" autocomplete="off" placeholder="날짜를 입력해주세요.">
+					<input type="text" id="startDate" name="selectedDate" class="form-row-input w-full rounded-sm border-2" autocomplete="off" placeholder="날짜를 입력해주세요." value="${selectedDate}">
 				</div>
 			</div>
 			<div class="form-row flex flex-col lg:flex-row">

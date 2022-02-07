@@ -29,4 +29,6 @@ public interface DiaryListDao {
 	void deleteDiaryList(@Param("id")int id);
 
 	List<DiaryList> getDiariesByRegDate(@Param("day")String day, @Param("past")String past);
+
+	Integer getIdByRegDate(@Param("selectedDate")String selectedDate);
 }
