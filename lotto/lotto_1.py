@@ -35,8 +35,11 @@ def 엑셀다운():
   time.sleep(2)
 
   # 편집허용 버튼 클릭(엑셀이 같은 모니터에 나오게 한 상태로 진행)
-  pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\pyunzip.png"))
-  time.sleep(1)
+  try:
+    pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\pyunzip.png"))
+    time.sleep(1)
+  except:
+    print("편집허용을 실패했습니다.")
   # # 다른 이름으로 저장 클릭
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\file.png"))
   time.sleep(1)

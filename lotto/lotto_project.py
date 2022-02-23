@@ -41,13 +41,13 @@ while True:
     
   내용 = ""
 
-  print("\n* 참고 : 최근 1등 당첨 번호가 과거 4 ~ 5등이었음")
+  print("\n* 참고 : 최근 1등 당첨 번호가 과거 4 ~ 5등이었던게 1 ~ 2개임")
   print("로또 예상 번호 : ")
   for num in ln.조합(cnt):
     ws.append(num)
     내용 += str(num)
     내용 += "\n"
-    print(num)
+    print(num, "\n")
   while True:
     replay = int(input("다시 번호를 구하려면 1, 그대로 저장하려면 2를 눌러주세요 >> "))
     if (replay == 1 or replay == 2):

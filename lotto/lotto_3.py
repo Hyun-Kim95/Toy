@@ -138,7 +138,7 @@ def 배수변형(bae,result):
 
 def 과거등수(result, 전체숫자):
   max_value = [0,0]
-  
+  more_value = []
   for chk, i in enumerate(전체숫자):
     noBonus = []
     for q in range(6):
@@ -153,17 +153,26 @@ def 과거등수(result, 전체숫자):
     if cnt > max_value[0]:
       max_value[0] = cnt
       max_value[1] = chk
+      more_value = []
+    elif cnt == max_value[0]:
+      more_value.append(chk)
+
   결과 = "과거기록 : "
+
+  ans = [(len(전체숫자) - max_value[1])]
+  for i in more_value:
+    ans.append(len(전체숫자) - i)
+
   if max_value[0] == 6:
-    결과 += "{}회차 1등".format(len(전체숫자) - max_value[1])
+    결과 += "{}회차 1등".format(ans)
   elif max_value[0] == 5.5:
-    결과 += "{}회차 2등".format(len(전체숫자) - max_value[1])
+    결과 += "{}회차 2등".format(ans)
   elif max_value[0] == 5:
-    결과 += "{}회차 3등".format(len(전체숫자) - max_value[1])
+    결과 += "{}회차 3등".format(ans)
   elif max_value[0] == 4:
-    결과 += "{}회차 4등".format(len(전체숫자) - max_value[1])
+    결과 += "{}회차 4등".format(ans)
   elif max_value[0] == 3:
-    결과 += "{}회차 5등".format(len(전체숫자) - max_value[1])
+    결과 += "{}회차 5등".format(ans)
   else:
     결과 += "없음"
   
