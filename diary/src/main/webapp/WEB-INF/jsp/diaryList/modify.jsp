@@ -7,7 +7,7 @@
 
 <c:set var="fileInputMaxCount" value="5" />
 <script>
-ArticleModify__fileInputMaxCount = parseInt("${fileInputMaxCount}");
+DiaryListModify__fileInputMaxCount = parseInt("${fileInputMaxCount}");
 const DiaryListId = parseInt("${diaryList.id}");
 </script>
 
@@ -72,6 +72,7 @@ function DiaryListModify__checkAndSubmit(form) {
 			const input = form["file__" + DiaryListId + "__" + inputNo];
 			if ( input.value.length > 0 ) {
 				needToUpload = true;
+				console.log('&&&&&&&&&&&&&')
 				break;
 			}
 		}
