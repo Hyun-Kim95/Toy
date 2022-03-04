@@ -1,10 +1,11 @@
 # 로또 엑셀 다운로드
 import time
-from selenium import webdriver
 import pyautogui
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 def 엑셀다운():
-  browser = webdriver.Chrome()
+  browser = webdriver.Chrome(ChromeDriverManager().install())
   browser.maximize_window()
 
   # 로또 url 접속
