@@ -4,6 +4,7 @@
 * This version of ChromeDriver only supports Chrome version 95
   * 이런 오류가 나면 최신버전으로 업그레이드 하면 됨
   * https://chromedriver.chromium.org/downloads
+  * **항상 최신버전으로 되도록 코드 수정함**
 
 ### lotto_1
 
