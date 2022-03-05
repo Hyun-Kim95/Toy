@@ -82,7 +82,7 @@ public class DiaryListService {
 	public String[] getDiariesMissing() throws ParseException {
 		String past = Util.getPastMonthStr();
 		String[] ans = new String[31];
-		String day = Util.getPastDateStr(1);
+		String day = Util.getNowDateStr();
 		List<DiaryList> chk = diaryListDao.getDiariesByRegDate(day,past);
 		// 사이의 날짜에는 양끝 날짜가 포함이 안돼서 +2를 해줌
 		int i = 0;
@@ -93,7 +93,7 @@ public class DiaryListService {
 			for (DiaryList diaryList : chk) {
 				j++;
 				if(j == chk.size()) {
-					String[] bf = Util.getBetweenDate(diaryList.getRegDate(), Util.getPastDateStr(1));
+					String[] bf = Util.getBetweenDate(diaryList.getRegDate(), Util.getNowDateStr());
 					for (String string : bf) {
 						ans[i] = string;
 						i++;
