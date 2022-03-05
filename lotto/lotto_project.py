@@ -41,7 +41,7 @@ while True:
     
   내용 = ""
 
-  print("\n* 참고 : 최근 1등 당첨 번호가 과거 4 ~ 5등이었던게 1 ~ 2개임")
+  print("\n* 참고 : 최근 1등 당첨 번호의 과거 기록은 4등이었던 경우가 2개 였음")
   print("로또 예상 번호 : ")
   for num in ln.조합(cnt):
     ws.append(num)
