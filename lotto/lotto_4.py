@@ -1,6 +1,8 @@
 # 조합 생성
 import math
 import random
+
+from sympy import false
 import lotto_2 as ex
 import lotto_3 as lo
 
@@ -11,7 +13,7 @@ cha = ex.cha
 # 오차 비교용(번걸아가면 숫자에 적용)
 bae = [lo.삼의배수(cha),lo.사의배수(cha)]
 
-def 조합(cnt):
+def 조합함수(cnt):
   # 추천조합 cnt개 구함
   조합 = []
   # 한개의 조합만 구하려면 마지막 숫자를 따로 구하는 로직을 실행할 수 없어서 여기 들어가야 함
@@ -79,7 +81,11 @@ def 조합(cnt):
           num += 1
       last_list.append(num)
       j += 1
-    last_list.append(lo.과거등수(last_list, 전체숫자))
+    체크 = lo.과거등수(last_list, 전체숫자)
+    if(체크 == false):
+      emptyList = []
+      return emptyList
+    last_list.append(체크)
     조합.append(last_list)
 
   return 조합

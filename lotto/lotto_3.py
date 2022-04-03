@@ -1,5 +1,8 @@
 # 사용할 함수 모음
 
+from sympy import false
+
+
 def 중복제거(num):
   if (num[0] != num[1] and num[0] != num[2] and num[0] != num[3] and num[0] != num[4] and num[0] != num[5] and 
       num[1] != num[2] and num[1] != num[3] and num[1] != num[4] and num[1] != num[5] and
@@ -139,27 +142,29 @@ def 배수변형(bae,result):
 def 과거등수(result, 전체숫자):
   max_value = [0,0]
   more_value = []
-  for chk, i in enumerate(전체숫자):
+  for i, chk in enumerate(전체숫자):
     noBonus = []
     for q in range(6):
-      noBonus.append(i[q])
+      noBonus.append(chk[q])
     cnt = 0
     for j in result:
       if j in noBonus:
         cnt += 1
     if cnt == 5:
-      if i[-1] in result:
+      if chk[-1] in result:
         cnt = 5.5
     if cnt > max_value[0]:
       max_value[0] = cnt
-      max_value[1] = chk
+      max_value[1] = i
       more_value = []
     elif cnt == max_value[0]:
-      more_value.append(chk)
+      more_value.append(i)
 
   결과 = "과거기록 : "
 
   ans = [(len(전체숫자) - max_value[1])]
+  if(len(more_value) >= 4):
+    return false
   for i in more_value:
     ans.append(len(전체숫자) - i)
 

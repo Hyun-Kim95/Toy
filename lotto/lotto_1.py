@@ -11,7 +11,7 @@ def 엑셀다운():
   # 로또 url 접속
   browser.get('https://www.dhlottery.co.kr/gameResult.do?method=byWin')
   # 1회차 부터 선택
-  time.sleep(1)
+  time.sleep(2)
   browser.find_element_by_xpath('//*[@id="drwNoStart"]').click()
   time.sleep(1)
   pyautogui.press("End")
@@ -33,7 +33,7 @@ def 엑셀다운():
   pyautogui.press("Enter")
   time.sleep(2)
   pyautogui.press("y")
-  time.sleep(2)
+  time.sleep(3)
 
   # 편집허용 버튼 클릭(엑셀이 같은 모니터에 나오게 한 상태로 진행)
   try:
