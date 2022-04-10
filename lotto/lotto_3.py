@@ -164,7 +164,7 @@ def 과거등수(result, 전체숫자):
 
   ans = [(len(전체숫자) - max_value[1])]
   if(len(more_value) >= 4):
-    return false
+    return ""
   for i in more_value:
     ans.append(len(전체숫자) - i)
 

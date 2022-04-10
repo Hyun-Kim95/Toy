@@ -82,9 +82,8 @@ def 조합함수(cnt):
       last_list.append(num)
       j += 1
     체크 = lo.과거등수(last_list, 전체숫자)
-    if(체크 == false):
-      emptyList = []
-      return emptyList
+    if(체크 == ""):
+      return []
     last_list.append(체크)
     조합.append(last_list)
 

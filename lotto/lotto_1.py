@@ -31,28 +31,28 @@ def 엑셀다운():
   pyautogui.write("C:\\Users\\User\\Downloads\\excel.xls")
   time.sleep(1)
   pyautogui.press("Enter")
-  time.sleep(2)
+  time.sleep(3)
   pyautogui.press("y")
   time.sleep(3)
 
   # 편집허용 버튼 클릭(엑셀이 같은 모니터에 나오게 한 상태로 진행)
   try:
     pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\pyunzip.png"))
-    time.sleep(1)
+    time.sleep(2)
   except:
     print("편집허용을 실패했습니다.")
   # # 다른 이름으로 저장 클릭
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\file.png"))
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\dsave.png"))
-  time.sleep(1)
+  time.sleep(2)
   # 폴더 선택
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\looking.png"))
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\search.png"))
   pyautogui.write("C:\\Users\\User\\Desktop\\lotto")
   pyautogui.press("Enter")
-  time.sleep(1)
+  time.sleep(2)
 
   # 확장자 변경 및 저장
   pyautogui.click(pyautogui.locateOnScreen("C:\\Users\\User\\Desktop\\lotto\\img\\hoak.png"))
@@ -62,9 +62,9 @@ def 엑셀다운():
   pyautogui.press("Enter")
   time.sleep(1)
   pyautogui.click(pyautogui.locateOnScreen("C:\\Hyun_Folder\\ETC\\lotto\\img\\csave.png"))
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.press("y")
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.hotkey("Alt","F4")
 
   # 다운받은 excel.xls 삭제
@@ -73,10 +73,10 @@ def 엑셀다운():
   pyautogui.write("C:\\Users\\User\\Downloads")
   time.sleep(1)
   pyautogui.press("Enter")
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.press("up")
   time.sleep(1)
   pyautogui.press("delete")
-  time.sleep(1)
+  time.sleep(2)
   pyautogui.hotkey("Alt","F4")
   print("엑셀다운로드 완료")

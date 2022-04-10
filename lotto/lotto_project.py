@@ -2,6 +2,7 @@ import time
 from openpyxl import Workbook
 from sympy import false, true
 import lotto_1 as a
+import lotto_2 as ex
 import lotto_4 as ln
 import lotto_5 as b
 
@@ -29,34 +30,6 @@ def 추첨번호갯수():
       print("숫자만 입력해주세요!")
       continue
   return cnt
-
-def 추첨번호생성(ws, cnt):
-  print("\n* 참고 : 최근 1등 당첨 번호의 과거 기록은 4등이었던 경우가 2 ~ 3개 였음")
-  print("로또 예상 번호 : ")
-  내용 = ""
-  while True:
-    조합 = ln.조합함수(cnt)
-    체크 = 0
-    for i in 조합:
-      if(len(i) == 0):
-        체크 = 1
-        break
-    if(체크 == 0):
-      break
-    
-  for num in 조합:
-    ws.append(num)
-    내용 += str(num)
-    내용 += "\n"
-    print(num, "\n")
-  return 내용
-  
-def 저장및메일전송(wb, 내용):
-  wb.save("C:\\Users\\User\\Desktop\\lotto\\lotto_result.xlsx")
-  print("엑셀에 저장 완료")
-
-  # 메일로 전송
-  b.실행(내용)
   
 def 종료():
   print("실행완료")
@@ -82,12 +55,35 @@ ws = wb.active
 
 cnt = 추첨번호갯수()
 
-내용 = 추첨번호생성(ws, cnt)
+print("\n* 참고 : 최근 1등 당첨 번호의 과거 기록은 4등이었던 경우가 2 ~ 3개 였음")
+a = ex.a - 3
+print("{} 회차 로또 예상 번호 : ".format(a))
+내용 = ""
+while True:
+  조합 = ln.조합함수(cnt)
+  체크 = 0
+  for i in 조합:
+    if(len(i[6]) == 0):
+      체크 = 1
+      break
 
+  if(len(조합) != 0 and 체크 == 0):
+    break
+
+for num in 조합:
+  ws.append(num)
+  내용 += str(num)
+  내용 += "\n"
+  print(num, "\n")
+  
 while True:
   savebtn = input("엑셀에 저장 및 메일로 전송을 하시려면  y, 그냥 종료 하시려면 n 을 입력하세요>> ")
   if(savebtn == 'y'):
-    저장및메일전송(wb,내용)
+    wb.save("C:\\Users\\User\\Desktop\\lotto\\lotto_result.xlsx")
+    print("엑셀에 저장 완료")
+
+    # 메일로 전송
+    b.실행(내용)
     종료()
     break
   elif(savebtn == 'n'):
